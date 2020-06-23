@@ -1,6 +1,7 @@
+import { uuid } from "uuidv4";
 class ChestModel {
   constructor(x, y, gold, spawnerId) {
-    this.id = `${spawnerId}-${uuid.v4()}`;
+    this.id = `${spawnerId}-${uuid()}`;
     this.spawnerId = spawnerId;
     this.x = x;
     this.y = y;
@@ -8,4 +9,4 @@ class ChestModel {
   }
 }
 
-export default ChestModel
+export default ChestModel;

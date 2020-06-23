@@ -1,8 +1,10 @@
+import Player from "./Player";
+
 const Direction = {
-  RIGHT: 'RIGHT',
-  LEFT: 'LEFT',
-  UP: 'UP',
-  DOWN: 'DOWN',
+  RIGHT: "RIGHT",
+  LEFT: "LEFT",
+  UP: "UP",
+  DOWN: "DOWN",
 };
 
 class PlayerContainer extends Phaser.GameObjects.Container {
@@ -35,7 +37,7 @@ class PlayerContainer extends Phaser.GameObjects.Container {
     this.add(this.player);
 
     // create the weapon game object
-    this.weapon = this.scene.add.image(40, 0, 'items', 4);
+    this.weapon = this.scene.add.image(40, 0, "items", 4);
     this.scene.add.existing(this.weapon);
     this.weapon.setScale(1.5);
     this.scene.physics.world.enable(this.weapon);
@@ -56,7 +58,12 @@ class PlayerContainer extends Phaser.GameObjects.Container {
     this.healthBar.fillStyle(0xffffff, 1);
     this.healthBar.fillRect(this.x - 32, this.y - 40, 64, 5);
     this.healthBar.fillGradientStyle(0xff0000, 0xffffff, 4);
-    this.healthBar.fillRect(this.x - 32, this.y - 40, 64 * (this.health / this.maxHealth), 5);
+    this.healthBar.fillRect(
+      this.x - 32,
+      this.y - 40,
+      64 * (this.health / this.maxHealth),
+      5
+    );
   }
 
   updateHealth(health) {
@@ -95,15 +102,23 @@ class PlayerContainer extends Phaser.GameObjects.Container {
       this.weapon.setPosition(0, 40);
     }
 
-    if (Phaser.Input.Keyboard.JustDown(cursors.space) && !this.playerAttacking) {
+    if (
+      Phaser.Input.Keyboard.JustDown(cursors.space) &&
+      !this.playerAttacking
+    ) {
       this.weapon.alpha = 1;
       this.playerAttacking = true;
       this.attackAudio.play();
-      this.scene.time.delayedCall(150, () => {
-        this.weapon.alpha = 0;
-        this.playerAttacking = false;
-        this.swordHit = false;
-      }, [], this);
+      this.scene.time.delayedCall(
+        150,
+        () => {
+          this.weapon.alpha = 0;
+          this.playerAttacking = false;
+          this.swordHit = false;
+        },
+        [],
+        this
+      );
     }
 
     if (this.playerAttacking) {
@@ -131,4 +146,4 @@ class PlayerContainer extends Phaser.GameObjects.Container {
   }
 }
 
-export default PlayerContainer
+export default PlayerContainer;

@@ -29,6 +29,8 @@
     "file-loader": "^5.0.2",
     "phaser": "^3.21.0",
     "raw-loader": "^4.0.0",
+    "uuid": "^8.1.0",
+    "uuidv4": "^6.1.0",
     "webpack": "^4.41.2",
     "webpack-dev-server": "^3.9.0"
   },

@@ -1,4 +1,7 @@
-import {SpawnerType} from './utils'
+import { SpawnerType, randomNumber } from "./utils";
+import ChestModel from "../managers/ChestModel";
+import MonsterModel from "../managers/MonsterModel";
+
 class Spawner {
   constructor(config, spawnLocations, addObject, deleteObject, moveObjects) {
     this.id = config.id;
@@ -34,7 +37,12 @@ class Spawner {
 
   spawnChest() {
     const location = this.pickRandomLocation();
-    const chest = new ChestModel(location[0], location[1], randomNumber(10, 20), this.id);
+    const chest = new ChestModel(
+      location[0],
+      location[1],
+      randomNumber(10, 20),
+      this.id
+    );
     this.objectsCreated.push(chest);
     this.addObject(chest.id, chest);
   }
@@ -48,14 +56,16 @@ class Spawner {
       this.id,
       randomNumber(0, 20),
       randomNumber(3, 5),
-      1,
-      );
+      1
+    );
     this.objectsCreated.push(monster);
     this.addObject(monster.id, monster);
   }
 
   pickRandomLocation() {
-    const location = this.spawnLocations[Math.floor(Math.random() * this.spawnLocations.length)];
+    const location = this.spawnLocations[
+      Math.floor(Math.random() * this.spawnLocations.length)
+    ];
     const invalidLocation = this.objectsCreated.some((obj) => {
       if (obj.x === location[0] && obj.y === location[1]) {
         return true;
@@ -68,7 +78,7 @@ class Spawner {
   }
 
   removeObject(id) {
-    this.objectsCreated = this.objectsCreated.filter(obj => obj.id !== id);
+    this.objectsCreated = this.objectsCreated.filter((obj) => obj.id !== id);
     this.deleteObject(id);
   }
 
@@ -83,4 +93,4 @@ class Spawner {
   }
 }
 
-export default Spawner
+export default Spawner;
